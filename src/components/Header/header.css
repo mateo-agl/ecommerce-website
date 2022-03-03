@@ -1,0 +1,259 @@
+#navbar-cont {
+    display: flex;
+    width: 100vw;
+    padding-top: 24px;
+}
+
+#navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 234px;
+    height: 56px;
+    margin: 0 auto 0 101px;
+    text-transform: uppercase;
+}
+
+.nav-item {
+    cursor: pointer;
+    padding: 0px 16px;
+    height: 100%;
+    position: relative;
+}
+
+.active {
+    font-weight: 600;
+    color: #5ECE7B;
+}
+
+.border {
+    position: absolute;
+    height: 2px;
+    left: 0%;
+    right: 0%;
+    bottom: 0px;
+    background: #5ECE7B;
+}
+
+#brand-icon {
+    width: 41px;
+    height: 41px;
+}
+
+#actions {
+    display: flex;
+    height: 40px;
+    width: 204px;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0 101px 0 auto;
+}
+
+#curr-switcher {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#curr-dropdown {
+    flex-direction: column;
+    position: absolute;
+    left: calc(100vw - 191px);
+    top: calc(80px - 16px);
+    width: 114px;
+    height: 169px;
+    justify-content: space-between;
+    padding: 20px 0 20px 20px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+}
+
+.arrow-up {
+    transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
+#minicart-btn, #curr-btn, .curr {
+    cursor: pointer;
+}
+
+.curr:hover {
+    color: #8D8F9A;
+}
+
+#dropdown-icon {
+    padding-left: 10px;
+}
+
+#minicart-btn {
+    margin-left: 22px;
+}
+
+#quantity-badge {
+    position: absolute;
+    left: calc(100vw - 110px);
+    top: 22px;
+    height: 20px;
+    width: 20px;
+    border-radius: 50px;
+    background: black;
+    color: white;
+    font-family: Roboto;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 22px;
+    justify-content: center;
+}
+
+#minicart {
+    position: absolute;
+    flex-direction: column;
+    width: fit-content;
+    height: 520px;
+    right: 80px;
+    top: 78px;
+    padding: 20px;
+    background: #FFFFFF;
+    z-index: 3;
+}
+
+#my-bag {
+    font-weight: 700;
+}
+
+#minicart-items {
+    width: 305px;
+    height: calc(100% - 137px);
+    padding: 0;
+    overflow-y: auto;
+}
+
+.minicart-item {
+    margin: 20px 0;
+    display: flex;
+    position: relative;
+}
+
+.mc-item-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 150px;
+}
+
+.mc-item-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.mc-item-price {
+    font-weight: 500;
+    line-height: 160%;
+}
+
+.mc-item-atts {
+    display: flex;
+}
+
+.mc-item-att, .mc-quant-btn {
+    text-align: center;
+    min-width: 24px;
+    height: 24px;
+    border: 1px solid #1D1F22;
+}
+
+.mc-item-att {
+    font-family: Source Sans Pro;
+    font-size: 14px;
+    line-height: 160%;
+    margin-right: 8px;
+}
+
+.mc-quant-btn {
+    font-size: 34px;
+    font-weight: 100;
+    line-height: 24px;
+    cursor: pointer;
+}
+
+.mc-quant-control {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mc-quant-num {
+    text-align: center;
+}
+
+.mc-item-img {
+    width: 105px;
+    height: 137px;
+    overflow: hidden;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+#dropdown-btns, #mc-total-cont {
+    position: absolute;
+    left: 0px;
+    background: #FFFFFF;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#mc-total-cont {
+    bottom: 67px;
+    height: 70px;
+}
+
+#mc-total-label, #mc-total-amount {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 18px;
+    margin: auto 20px;
+}
+
+#dropdown-btns {
+    bottom: 20px;
+}
+
+#view-bag, #checkout {
+    padding: 0 36px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    height: 45px;
+    line-height: 45px;
+}
+
+#view-bag {
+    border: 1px solid black;
+    margin-left: 20px;
+}
+
+#checkout {
+    background: #5ECE7B;
+    color: #FFFFFF;
+    margin-right: 20px;
+}
+
+#rectangle-2 {
+    position: absolute;
+    top: 80px;
+    width: 100%;
+    height: calc(100% - 80px);
+    background: rgba(57, 55, 72, 0.22);
+    z-index: 2;
+}

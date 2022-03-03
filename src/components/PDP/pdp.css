@@ -1,0 +1,150 @@
+#product-desc {
+    display: flex;
+    width: 100vw;
+    height: calc(100vh - 80px);
+    align-items: center;
+    justify-content: center;
+}
+
+#content {
+    display: flex;
+    width: 1002px;
+    height: 513px;
+    justify-content: space-between;
+}
+
+#info {
+    width: 292px;
+    height: fit-content;
+}
+
+#main-img, .imgs {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#main-img {
+    width: 610px;
+    height: 511px;
+}
+
+#imgs-col {
+    display: grid;
+    gap: 20px;
+    max-height: 100%;
+}
+
+.imgs {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+}
+
+.imgs-rectangle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #FFFFFF;
+    opacity: 0;
+}
+
+.imgs-rectangle:hover {
+    opacity: .5;
+}
+
+#pdp-title, #subtitle {
+    font-size: 30px;
+    line-height: 27px;
+    width: 292px;
+    height: 27px;
+}
+
+#pdp-title {
+    margin-bottom: 16px;
+}
+
+#subtitle {
+    margin-bottom: 43px;
+}
+
+#attributes {
+    margin-bottom: 40px;
+}
+
+.att {
+    margin-bottom: 10px;
+}
+
+.att-name {
+    font-family: Roboto Condensed;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 18px;
+}
+
+.att-btns {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 63px);
+    gap: 12px;
+}
+
+.text-btn, .color-btn {
+    border: 1px solid #1D1F22;
+    width: 63px;
+    height: 45px;
+    cursor: pointer;
+    font-family: Source Sans Pro;
+    line-height: 18px;
+}
+
+.text-btn {
+    text-align: center;
+    line-height: 45px;
+}
+
+.selected-color {
+    border: 3px solid black;
+}
+
+.selected-att {
+    background: #1D1F22;
+    color: #FFFFFF;
+}
+
+#price-cont {
+    margin-bottom: 20px;
+}
+
+#art-price {
+    display: flex;
+    align-items: center;
+    width: 86px;
+    height: 46px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 18px;
+}
+
+#pdp-atc-btn {
+    text-align: center;
+    height: 52px;
+    line-height: 52px;
+    background: #5ECE7B;
+    cursor: pointer;
+    margin-bottom: 40px;
+}
+
+#atc-label {
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+#no-stock {
+    display: none;
+}
