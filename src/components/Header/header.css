@@ -151,11 +151,11 @@
 
 .mc-item-atts {
     display: flex;
+    flex-direction: column;
 }
 
-.mc-item-att, .mc-quant-btn {
+.mc-item-att, .mc-item-color, .mc-quant-btn {
     text-align: center;
-    min-width: 24px;
     height: 24px;
     border: 1px solid #1D1F22;
 }
@@ -164,10 +164,16 @@
     font-family: Source Sans Pro;
     font-size: 14px;
     line-height: 160%;
-    margin-right: 8px;
+}
+
+.atts-cont {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 42px);
+    gap: 4px;
 }
 
 .mc-quant-btn {
+    width: 24px;
     font-size: 34px;
     font-weight: 100;
     line-height: 24px;
@@ -178,6 +184,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 137px;
 }
 
 .mc-quant-num {

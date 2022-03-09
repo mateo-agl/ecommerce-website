@@ -105,15 +105,6 @@
     line-height: 45px;
 }
 
-.selected-color {
-    border: 3px solid black;
-}
-
-.selected-att {
-    background: #1D1F22;
-    color: #FFFFFF;
-}
-
 #price-cont {
     margin-bottom: 20px;
 }

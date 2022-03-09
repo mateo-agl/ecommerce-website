@@ -1,170 +1,80 @@
-import React from "react";
-import { Field, Query, client } from "@tilework/opus";
-import "./pdp.css";
+import React from 'react';
+import { fetchPdpData } from '../../queries.js';
+import './pdp.css';
+import Images from './Images.jsx';
+import Info from './Info/Info.jsx';
 
 export class PDP extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { data: false }
-    }
-    render() {
-        if (!this.state.data) return "";
-        return (
-            <article id="product-desc">
-                <div id="imgs-col">
-                    {
-                        this.state.gallery.map(
-                            (img, i) =>
-                            <div 
-                                className="imgs" 
-                                onClick={ () => this.changeImg(img) }
-                                key={i}>
-                                <img
-                                    src={img} 
-                                    alt={"product photo #" + i} 
-                                />
-                                <div className="imgs-rectangle"/>
-                            </div>
-                        )
-                    }
-                </div>
-                <div id="content">
-                    <div id="main-img">
-                        <img 
-                            src={ this.state.mainImg }
-                            alt="product" 
-                        />
-                    </div>
-                    <div id="info">
-                        <h2 id="pdp-title">{this.state.brand}</h2>
-                        <p id="subtitle">{this.state.name}</p>
-                        <div id="attributes">
-                            {
-                                this.state.attributes.map(
-                                    (obj, i) => 
-                                    <section className="att" key={i}>
-                                        <label className="att-name">{obj.name}</label>
-                                        <div className="att-btns">
-                                            {
-                                                obj.type === "text" ?
-                                                obj.items.map(
-                                                    (item, u) => 
-                                                    <span
-                                                        className={
-                                                            this.state.selectedAtts[i] === item.value ?
-                                                                "text-btn selected-att" :
-                                                                    "text-btn"
-                                                            }
-                                                        onClick={ () => this.selectAttribute(item, i) }
-                                                        key={u}>
-                                                        {item.value}
-                                                    </span>
-                                                ) : 
-                                                obj.type === "swatch" ?
-                                                obj.items.map(
-                                                    (item, u) => 
-                                                    <span 
-                                                        className={
-                                                            this.state.selectedAtts[i] === item.value ?
-                                                                "color-btn selected-color" :
-                                                                    "color-btn"
-                                                            }
-                                                        style={{ background: item.value }}
-                                                        onClick={ () => this.selectAttribute(item, i) }
-                                                        key={u}
-                                                    />
-                                                ) : null
-                                            }
-                                        </div>
-                                    </section>
-                                )
-                            }
-                        </div>
-                        <div id="price-cont">
-                            <label>PRICE:</label>
-                            <p id="art-price">
-                                { this.props.currency + this.props.getPrice(this.state) }
-                            </p>
-                        </div>
-                        <div 
-                            id={
-                                this.state.inStock ?
-                                "pdp-atc-btn" :
-                                "no-stock"
-                            }
-                            onClick={ () => 
-                                this.props.addToCart(this.state.id,
-                                {
-                                    id: this.state.id,
-                                    brand: this.state.brand,
-                                    name: this.state.name,
-                                    prices: this.state.prices,
-                                    selectedAtts: this.state.selectedAtts.slice(),
-                                    quantity: 1,
-                                    imgs: this.state.gallery
-                                }) }
-                        >
-                            <span id="atc-label">ADD TO CART</span>
-                        </div>
-                        <div id="description" dangerouslySetInnerHTML={
-                            {__html: this.state.description}
-                            }
-                        />
-                    </div>
-                </div>
-            </article>
-        )
-    }
-    changeImg(img) {
-        this.setState({ mainImg: img })
-    }
+	constructor (props) {
+		super(props);
+		this.state = { data: false };
+		this.changeImg = this.changeImg.bind(this);
+		this.selectAttribute = this.selectAttribute.bind(this);
+	}
 
-    selectAttribute(item, i) {
-        let newSelec = this.state.selectedAtts;
-        newSelec[i] = item.value;
-        this.setState({ selectedAtts: newSelec })
-    }
+	render () {
+		if (!this.state.data) return '';
+		return (
+			<article id="product-desc">
+				<div id="content">
+					<Images
+						changeImg={this.changeImg}
+						gallery={this.state.gallery}
+					/>
+					<div id="main-img">
+						<img
+							alt="product"
+							src={ this.state.mainImg }
+						/>
+					</div>
+					<Info
+						addToCart={this.props.addToCart}
+						currency={this.props.currency}
+						getPrice={this.props.getPrice}
+						selectAttribute={this.selectAttribute}
+						state={this.state}
+					/>
+				</div>
+			</article>
+		);
+	}
 
-    componentDidMount() {
-        const arg = window.location.pathname.split('/')[1];
+	changeImg (img) {
+		this.setState({ mainImg: img });
+	}
 
-        this.fetchPdpData(arg).then(response => {
-            const defaultSelec =  response.product.attributes.map(
-                (att) => att.items[0].value
-            )
+	selectAttribute (att, itemIndex) {
+		att.items.map((obj, i) => 
+			i === itemIndex
+				? att.items[i].selected = true
+				: att.items[i].selected = false
+		);
+		this.setState({ attributes: this.state.attributes });
+	}
 
-            this.setState({
-                ...response.product,
-                mainImg: response.product.gallery[0],
-                selectedAtts: defaultSelec,
-                data: true
-            })
-        }
-        ).catch(e => console.error(e));
-    }
+	componentDidMount () {
+		const arg = window.location.pathname.split('/')[1];
 
-    fetchPdpData(arg) {
-        const pdpData = new Query("product")
-        .addArgument('id', 'String!', arg)
-        .addField("id")
-        .addField("name")
-        .addField("gallery", true)
-        .addField("description")
-        .addField("inStock")
-        .addField(new Field("attributes", true)
-            .addField("name")
-            .addField("type")
-            .addField(new Field("items", true)
-                .addField("value")
-            )
-        )
-        .addField(new Field("prices", true)
-            .addField(new Field("currency")
-                .addField("symbol")
-            )
-            .addField("amount")
-        )
-        .addField("brand");
-        return client.post(pdpData);
-    }
+		fetchPdpData(arg).then(response => {
+			const defaultSelec = response.product.attributes.map(
+				att => {
+					const items = [];
+					att.items.map(
+						(item, i) => i === 0
+							? items.push({...item, selected: true})
+							: items.push({...item, selected: false})
+					);
+					return { ...att, items };
+				}
+			);
+			
+			this.setState({
+				...response.product,
+				attributes: defaultSelec,
+				mainImg: response.product.gallery[0],
+				data: true
+			});
+		}
+		).catch(e => console.error(e));
+	}
 }

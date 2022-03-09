@@ -33,6 +33,7 @@
 .item-info {
     display: flex;
     flex-direction: column;
+    width: 370px;
 }
 
 .item-brand {
@@ -54,6 +55,13 @@
 
 .item-atts {
     display: flex;
+    flex-direction: column;
+}
+
+.cart-atts-cont {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 65px);
+    gap: 8px;
 }
 
 .cart-selected-att {
