@@ -55,8 +55,8 @@ export class PDP extends React.Component {
 	}
 
 	componentDidMount() {
-		const id = window.location.pathname.split('/')[1];
-
+		const id = window.location.pathname.split('/')[2];
+		
 		if(id) {
 			const product = products.find(p => p.id === id);
 

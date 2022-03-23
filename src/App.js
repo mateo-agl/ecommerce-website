@@ -53,7 +53,7 @@ export class App extends React.Component {
 								currency={this.state.currency}
 								getPrice={this.getPrice}
 							/>
-						} path="/:id"
+						} path=":id"
 						/>
 						<Route element={
 							<Cart
@@ -63,7 +63,7 @@ export class App extends React.Component {
 								getPrice={this.getPrice}
 								increase={this.increase}
 							/>
-						} path="/cart"
+						} path="cart"
 						/>
 					</Route>
 				</Routes>
