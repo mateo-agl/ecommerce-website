@@ -1,17 +1,16 @@
 import React from 'react';
 import arrow from '../../../assets/arrow.svg';
-import { fetchCurrencies } from '../../../queries.js';
+import { currencies } from '../../../data.js';
 
 export default class CurrSwitcher extends React.Component {
 	constructor (props) {
 		super(props);
 		this.state = {
-			data: false
+			currencies: currencies
 		};
 	}
 
 	render () {
-		if (!this.state.data) return '';
 		return (
 			<div id="curr-switcher">
 				<div
@@ -49,14 +48,5 @@ export default class CurrSwitcher extends React.Component {
 				</ul>
 			</div>
 		);
-	}
-
-	componentDidMount () {
-		fetchCurrencies().then(response =>
-			this.setState({
-				currencies: response.currencies,
-				data: true
-			})
-		).catch(e => console.error(e));
 	}
 }

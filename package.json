@@ -1,11 +1,10 @@
 {
-  "name": "react-test",
+  "name": "ecommerce-website",
   "version": "0.1.0",
   "author": "Mateo Aguilar",
-  "private": true,
   "dependencies": {
-    "@tilework/opus": "0.0.10",
     "dompurify": "^2.3.6",
+    "gh-pages": "^3.2.3",
     "html-react-parser": "^1.4.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -14,6 +13,8 @@
     "react-scripts": "5.0.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -49,5 +50,13 @@
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-react": "^7.29.3"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mateo-agl/ecommerce-website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mateo-agl/ecommerce-website/issues"
+  },
+  "homepage": "https://github.com/mateo-agl/ecommerce-website#readme"
 }

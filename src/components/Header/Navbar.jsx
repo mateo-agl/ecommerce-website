@@ -1,17 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { fetchCategories } from '../../queries.js';
+import { categories } from '../../data.js';
 
 export default class Navbar extends React.Component {
 	constructor (props) {
 		super(props);
 		this.state = {
-			data: false
+			categories: categories
 		};
 	}
-
 	render () {
-		if (!this.state.data) return '';
 		return (
 			<nav id="navbar">
 				{
@@ -39,14 +36,5 @@ export default class Navbar extends React.Component {
 				}
 			</nav>
 		);
-	}
-
-	componentDidMount () {
-		fetchCategories().then(response =>
-			this.setState({
-				categories: response.categories,
-				data: true
-			})
-		).catch(e => console.error(e));
 	}
 }

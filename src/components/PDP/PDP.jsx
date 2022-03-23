@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchPdpData } from '../../queries.js';
+import { products } from '../../data.js';
 import './pdp.css';
 import Images from './Images.jsx';
 import Info from './Info/Info.jsx';
@@ -7,13 +7,15 @@ import Info from './Info/Info.jsx';
 export class PDP extends React.Component {
 	constructor (props) {
 		super(props);
-		this.state = { data: false };
+		this.state = { 
+			data: false
+		};
 		this.changeImg = this.changeImg.bind(this);
 		this.selectAttribute = this.selectAttribute.bind(this);
 	}
-
+	
 	render () {
-		if (!this.state.data) return '';
+		if (!this.state.data) return "";
 		return (
 			<article id="product-desc">
 				<div id="content">
@@ -52,11 +54,13 @@ export class PDP extends React.Component {
 		this.setState({ attributes: this.state.attributes });
 	}
 
-	componentDidMount () {
-		const arg = window.location.pathname.split('/')[1];
+	componentDidMount() {
+		const id = window.location.pathname.split('/')[1];
 
-		fetchPdpData(arg).then(response => {
-			const defaultSelec = response.product.attributes.map(
+		if(id) {
+			const product = products.find(p => p.id === id);
+
+			const defaultSelec = product.attributes.map(
 				att => {
 					const items = [];
 					att.items.map(
@@ -67,14 +71,13 @@ export class PDP extends React.Component {
 					return { ...att, items };
 				}
 			);
-			
+
 			this.setState({
-				...response.product,
+				...product,
 				attributes: defaultSelec,
-				mainImg: response.product.gallery[0],
+				mainImg: product.gallery[0],
 				data: true
 			});
 		}
-		).catch(e => console.error(e));
 	}
 }
