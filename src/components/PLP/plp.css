@@ -12,8 +12,7 @@
 
 #products-cont {
     display: grid;
-    grid-template-columns: repeat(3, 386px);
-    grid-template-rows: repeat(auto-fill, auto);
+    grid-template-columns: repeat(auto-fill, 386px);
     column-gap: 40px;
     row-gap: 103px;
     justify-content: center;
@@ -48,6 +47,8 @@
 
 .image {
     max-width: 100%;
+    height: fit-content;
+    max-height: 100%;
 }
 
 .out-of-stock {
@@ -94,4 +95,27 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 160%;
+}
+
+@media (max-width: 1024px) {
+    .add-cart-btn {
+        display: flex;
+    }
+}
+
+@media (max-width: 400px) {
+    #product-cont {
+        grid-template-columns: repeat(auto-fill, 280px);
+    }
+
+    .product {
+        width: 280px;
+        margin: 0 auto;
+    }
+
+    .image-cont {
+        width: 100%;
+        height: 300px;
+        align-items: center;
+    }
 }

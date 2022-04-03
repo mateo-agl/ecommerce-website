@@ -42,7 +42,9 @@ export class PDP extends React.Component {
 	}
 
 	changeImg (img) {
-		this.setState({ mainImg: img });
+		window.innerWidth > 1024
+			? this.setState({ mainImg: img })
+			: false;
 	}
 
 	selectAttribute (att, itemIndex) {

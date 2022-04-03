@@ -139,3 +139,53 @@
 #no-stock {
     display: none;
 }
+
+@media (max-width: 1024px) {
+    #product-desc {
+        height: 100vh;
+    }
+    #content {
+        display: block;
+        height: 100%;
+        width: fit-content;
+        margin: 0 auto;
+    }
+
+    #main-img {
+        display: none;
+    }
+
+    #imgs-col {
+        display: flex;
+        max-width: 100vw;
+        overflow-y: hidden;
+        overflow-x: scroll;
+        margin: 2em auto;
+    }
+
+    .imgs-rectangle {
+        cursor: none;
+    }
+
+    .imgs-rectangle:hover {
+        opacity: 0;
+    }
+    
+    .imgs {
+        overflow: visible;
+        width: 280px;
+        height: 420px;
+    }
+
+    .imgs img {
+        width: 280px;
+        height: fit-content;
+        max-height: 100%;
+        margin: auto 0;
+    }
+
+    #info {
+        margin: 0 auto;
+        padding-bottom: 1em;
+    }
+}

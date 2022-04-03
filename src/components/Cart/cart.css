@@ -124,3 +124,39 @@
     left: 18px;
     transform: matrix(-1, 0, 0, 1, 0, 0);
 }
+
+@media (max-width: 1024px) {
+    #cart-page {
+        margin: 80px 0;
+    }
+
+    #cart {
+        margin: 0 0 100px 10%;
+    }
+
+    .cart-item {
+        position: relative;
+        width: 100%;
+        min-width: 280px;
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .quantity-control {
+        flex-direction: row;
+        width: 280px;
+        margin: 1em auto;
+    }
+
+    .item-img {
+        width: 280px;
+        height: 420px;
+        margin: 0;
+    }
+
+    .item-info {
+        display: block;
+        width: auto;
+        margin: 0 auto;
+    }
+}

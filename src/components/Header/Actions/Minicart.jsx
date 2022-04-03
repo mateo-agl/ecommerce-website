@@ -48,15 +48,17 @@ export default class Minicart extends React.Component {
 							)
 						}
 					</ul>
-					<div id="mc-total-cont">
-						<label id="mc-total-label">Total</label>
-						<label id="mc-total-amount">{this.getTotalAmount()}</label>
-					</div>
-					<div id="dropdown-btns">
-						<Link id="view-bag" to="/cart">
-							<span>VIEW BAG</span>
-						</Link>
-						<span id="checkout">CHECKOUT</span>
+					<div className="mc-bottom">
+						<div id="mc-total-cont">
+							<label id="mc-total-label">Total</label>
+							<label id="mc-total-amount">{this.getTotalAmount()}</label>
+						</div>
+						<div id="dropdown-btns">
+							<Link id="view-bag" to="/cart">
+								<span>VIEW BAG</span>
+							</Link>
+							<span id="checkout">CHECKOUT</span>
+						</div>
 					</div>
 				</div>
 			</div>

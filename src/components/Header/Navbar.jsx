@@ -21,16 +21,12 @@ export default class Navbar extends React.Component {
 										: 'nav-item'
 								}
 								key={i}
-								onClick={this.props.changeCategory}
+								onClick={e => {
+									this.props.changeCategory(e);
+									this.props.showMenu();
+								}}
 							>
 								{ obj.name }
-								<div
-									className={
-										obj.name === this.props.category
-											? 'border'
-											: ''
-									}
-								/>
 							</label>
 					)
 				}

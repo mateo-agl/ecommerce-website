@@ -10,8 +10,10 @@ export class Header extends React.Component {
 		super(props);
 		this.state = {
 			overlay: false,
-			switch: false
+			switch: false,
+			show: false
 		};
+		this.showMenu = this.showMenu.bind(this);
 		this.miniCartHandler = this.miniCartHandler.bind(this);
 		this.switcherHandler = this.switcherHandler.bind(this);
 	}
@@ -28,10 +30,19 @@ export class Header extends React.Component {
 		};
 		return (
 			<header id="navbar-cont">
-				<Navbar
-					category={this.props.category}
-					changeCategory={this.props.changeCategory}
-				/>
+				<div 
+					className="ham-btn"
+					onClick={this.showMenu}
+				>
+					<i className={this.state.show ? "hamburger active" : "hamburger"}/>
+				</div>
+				<div className={this.state.show ? "mobile-menu show" : "mobile-menu"}>
+					<Navbar
+						category={this.props.category}
+						changeCategory={this.props.changeCategory}
+						showMenu={this.showMenu}
+					/>
+				</div>
 				<Link to="/">
 					<img
 						alt="brand icon"
@@ -62,6 +73,17 @@ export class Header extends React.Component {
 				/>
 			</header>
 		);
+	}
+
+	showMenu () {
+		if (window.innerWidth < 1024) {
+			this.setState({ show: !this.state.show });
+			if (!this.state.show) {
+				document.querySelector("body").className = "overflow-hidden";
+			} else {
+				document.querySelector("body").className = "";
+			}
+		}
 	}
 
 	miniCartHandler () {
