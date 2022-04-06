@@ -1,5 +1,5 @@
 import React from 'react';
-import arrow from '../../../assets/img-arrow.svg';
+import { ReactComponent as Arrow } from '../../../assets/img-arrow.svg';
 
 export default class Img extends React.Component {
 	constructor (props) {
@@ -15,16 +15,14 @@ export default class Img extends React.Component {
 					alt="product thumbnail"
 					src={this.props.item.imgs[this.state.imgsIndexes[this.props.item.id]]}
 				/>
-				<img
+				<Arrow
 					alt="right arrow"
 					className="right-arrow"
-					src={arrow}
 					onClick={() => this.nextImg(this.props.item.imgs.length, this.props.item.id)}
 				/>
-				<img
+				<Arrow
 					alt="left arrow"
 					className="left-arrow"
-					src={arrow}
 					onClick={() => this.previousImg(this.props.item.id)}
 				/>
 			</div>

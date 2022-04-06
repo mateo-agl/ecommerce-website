@@ -111,17 +111,20 @@
 .right-arrow, .left-arrow {
     position: absolute;
     bottom: 50%;
-    width: 7px;
-    height: 13px;
+    width: 1em;
+    height: 1em;
     cursor: pointer;
+    background: black;
+    border-radius: 50px;
+    padding: 4px;
 }
 
 .right-arrow {
-    right: 18px;
+    right: 0px;
 }
 
 .left-arrow {
-    left: 18px;
+    left: 0px;
     transform: matrix(-1, 0, 0, 1, 0, 0);
 }
 
