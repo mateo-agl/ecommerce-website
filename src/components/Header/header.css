@@ -57,6 +57,7 @@
 }
 
 #curr-switcher {
+    position: relative;
     font-size: 18px;
     font-weight: 500;
 }
@@ -64,8 +65,8 @@
 #curr-dropdown {
     flex-direction: column;
     position: absolute;
-    left: calc(100vw - 191px);
-    top: calc(80px - 16px);
+    margin-top: .5em;
+    right: -.5em;
     width: 114px;
     height: 169px;
     justify-content: space-between;
@@ -290,14 +291,14 @@
         display: flex;
         justify-content: center;
         position: absolute;
-        z-index: 3;
-        margin: 0;
-        top: -24px;
-        left: -100%;
-        background: #FFFFFF;
-        transition: .2s;
         height: calc(100vh + 24px);
         width: 100vw;
+        margin: 0;
+        top: -24px;
+        left: -100vw;
+        background: #FFFFFF;
+        transition: .2s;
+        z-index: 3;
     }
 
     #navbar {
