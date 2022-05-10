@@ -2,8 +2,6 @@ import React from 'react';
 import { Header, PLP, Cart, PDP } from './components';
 import { Routes, Route } from 'react-router-dom';
 
-const StateContext = React.createContext({});
-
 export class App extends React.Component {
 	constructor (props) {
 		super(props);
