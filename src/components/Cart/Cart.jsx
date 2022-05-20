@@ -1,6 +1,6 @@
 import React from 'react';
 import Item from './Item/Item.jsx';
-import './cart.css';
+import './cart.sass';
 
 export class Cart extends React.Component {
 	render () {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { products } from '../../data.js';
 import Product from './Product/Product.jsx';
-import './plp.css';
+import './plp.sass';
 
 export class PLP extends React.Component {
 	constructor (props) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { products } from '../../data.js';
-import './pdp.css';
+import './pdp.sass';
 import Images from './Images.jsx';
 import Info from './Info/Info.jsx';
 

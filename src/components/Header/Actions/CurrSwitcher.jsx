@@ -17,15 +17,14 @@ export default class CurrSwitcher extends React.Component {
 					id="curr-btn"
 					onClick={ () => this.props.switcherHandler() }
 				>
-					{this.props.currency}
+					{this.props.currency + " "}
 					<img
 						alt="arrow icon"
 						className={
-							this.state.switch
+							this.props.switch
 								? 'arrow-up'
 								: ''
 						}
-						id="dropdown-icon"
 						src={arrow}
 					/>
 				</div>

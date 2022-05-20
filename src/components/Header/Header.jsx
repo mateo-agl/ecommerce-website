@@ -1,7 +1,7 @@
 import React from 'react';
 import brand from '../../assets/brand-icon.svg';
 import { Link } from 'react-router-dom';
-import './header.css';
+import './header.sass';
 import Navbar from './Navbar';
 import Actions from './Actions/Actions';
 
