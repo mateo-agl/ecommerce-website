@@ -24,7 +24,7 @@ export default class Item extends React.Component {
 				/>
 				<img
 					alt="delete icon"
-					className="delete"
+					className="delete btn"
 					src={deleteIcon}
 					onClick={() => this.props.removeFromCart(this.props.i)}
 				/>

@@ -3,10 +3,10 @@ import React from 'react';
 export default class AddToCart extends React.Component {
 	render () {
 		return (
-			<div id={
+			<div className={
 				this.props.state.inStock
-					? 'pdp-atc-btn'
-					: 'no-stock'
+					? 'pdp-atc btn visible'
+					: 'pdp-atc btn invisible'
 			}
 			onClick={ () =>
 				this.props.addToCart(this.props.state.id,

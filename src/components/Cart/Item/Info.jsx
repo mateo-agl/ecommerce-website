@@ -30,8 +30,8 @@ export default class Info extends React.Component {
 														<div
 															className={ 
 																item.selected
-																	? "cart-selected-att selected-color"
-																	: "cart-selected-att"
+																	? "cart-item-att selected-color"
+																	: "cart-item-att"
 															}
 															key={u}
 															style={{ background: item.value }}
@@ -43,8 +43,8 @@ export default class Info extends React.Component {
 															<div
 																className={ 
 																	item.selected
-																		? "cart-selected-att selected-att"
-																		: "cart-selected-att"
+																		? "cart-item-att selected-att"
+																		: "cart-item-att"
 																}
 																key={u}
 															>

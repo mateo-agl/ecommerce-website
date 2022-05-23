@@ -17,8 +17,8 @@ export default class Navbar extends React.Component {
 							<label 
 								className={
 									obj.name === this.props.category
-										? 'nav-item active'
-										: 'nav-item'
+										? 'nav-item btn active'
+										: 'nav-item btn'
 								}
 								key={i}
 								onClick={e => {

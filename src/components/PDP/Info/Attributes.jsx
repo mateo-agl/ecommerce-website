@@ -17,8 +17,8 @@ export default class Attributes extends React.Component {
 													<span
 														className={
 															item.selected
-																? 'text-btn selected-att'
-																: 'text-btn'
+																? 'text-att btn selected-att'
+																: 'text-att btn'
 														}
 														key={u}
 														onClick={ () => this.props.selectAttribute(obj, u) }
@@ -32,8 +32,8 @@ export default class Attributes extends React.Component {
 														<span
 															className={
 																item.selected
-																	? 'color-btn selected-color'
-																	: 'color-btn'
+																	? 'color-att btn selected-color'
+																	: 'color-att btn'
 															}
 															key={u}
 															style={{ background: item.value }}

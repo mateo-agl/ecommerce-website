@@ -5,13 +5,13 @@ export default class Quantity extends React.Component {
 		return (
 			<div className="quantity-control">
 				<span
-					className="quantity-btn"
+					className="quantity btn"
 					onClick={ () => this.props.increase(this.props.i) }
 				>+
 				</span>
 				<label className="quantity">{this.props.item.quantity}</label>
 				<span
-					className="quantity-btn"
+					className="quantity btn"
 					onClick={ () => this.props.decrease(this.props.i) }
 				>-
 				</span>

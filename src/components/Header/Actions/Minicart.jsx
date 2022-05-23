@@ -8,6 +8,7 @@ export default class Minicart extends React.Component {
 		return (
 			<div id="minicart-cont">
 				<div
+					className="btn"
 					id="minicart-btn"
 					onClick={ () => this.props.miniCartHandler() }
 				>
@@ -54,10 +55,10 @@ export default class Minicart extends React.Component {
 							<label id="mc-total-amount">{this.getTotalAmount()}</label>
 						</div>
 						<div id="dropdown-btns">
-							<Link id="view-bag" to="/cart">
+							<Link className="btn" id="view-bag" to="/cart">
 								<span>VIEW BAG</span>
 							</Link>
-							<span id="checkout">CHECKOUT</span>
+							<span className="btn" id="checkout">CHECKOUT</span>
 						</div>
 					</div>
 				</div>

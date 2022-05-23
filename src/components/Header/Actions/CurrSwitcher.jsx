@@ -14,6 +14,7 @@ export default class CurrSwitcher extends React.Component {
 		return (
 			<div id="curr-switcher">
 				<div
+					className="btn"
 					id="curr-btn"
 					onClick={ () => this.props.switcherHandler() }
 				>
@@ -36,7 +37,7 @@ export default class CurrSwitcher extends React.Component {
 						this.state.currencies.map(
 							(obj, i) =>
 								<li
-									className="curr"
+									className="curr btn"
 									key={i}
 									onClick={this.props.changeCurrency}
 								>
