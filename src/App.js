@@ -122,6 +122,7 @@ export class App extends React.Component {
 			newProduct.quantity = 1;
 			cart.push(JSON.parse(JSON.stringify(newProduct)));
 		}
+		localStorage.setItem("cart", JSON.stringify(cart));
 		this.setState({ cart: cart });
 	}
 
@@ -137,5 +138,12 @@ export class App extends React.Component {
 		const curr = e.target.textContent.split(' ')[0];
 
 		this.setState({ currency: curr });
+	}
+
+	componentDidMount() {
+		const savedItems = localStorage.getItem("cart");
+		if (savedItems) {
+			this.setState({ cart: JSON.parse(savedItems) });
+		};
 	}
 }
