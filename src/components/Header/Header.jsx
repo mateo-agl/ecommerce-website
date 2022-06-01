@@ -78,11 +78,7 @@ export class Header extends React.Component {
 	showMenu () {
 		if (window.innerWidth < 1024) {
 			this.setState({ show: !this.state.show });
-			if (!this.state.show) {
-				document.querySelector("body").className = "overflow-hidden";
-			} else {
-				document.querySelector("body").className = "";
-			}
+			document.querySelector("body").className = !this.state.show ? "overflow-hidden" : ""
 		}
 	}
 
