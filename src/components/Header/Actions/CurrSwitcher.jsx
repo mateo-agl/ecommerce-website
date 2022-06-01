@@ -1,16 +1,17 @@
+import axios from 'axios';
 import React from 'react';
 import arrow from '../../../assets/arrow.svg';
-import { currencies } from '../../../data.js';
 
 export default class CurrSwitcher extends React.Component {
 	constructor (props) {
 		super(props);
 		this.state = {
-			currencies: currencies
+			data: false
 		};
 	}
 
 	render () {
+		if(!this.state.data) return "";
 		return (
 			<div id="curr-switcher">
 				<div
@@ -49,4 +50,12 @@ export default class CurrSwitcher extends React.Component {
 			</div>
 		);
 	}
-}
+	componentDidMount() {
+		const url = process.env.NODE_ENV === "development"
+			? "http://localhost:8080/currencies"
+			: "/currencies";
+		axios.get(url)
+			.then(res => this.setState({ currencies: res.data, data: true }))
+			.catch(err => console.error(err));
+	}
+};

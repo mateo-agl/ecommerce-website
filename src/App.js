@@ -103,6 +103,7 @@ export class App extends React.Component {
 	removeFromCart (i) {
 		const cart = this.state.cart;
 		cart.splice(i, 1);
+		localStorage.setItem("cart", JSON.stringify(cart));
 		this.setState({ cart: cart });
 	}
 

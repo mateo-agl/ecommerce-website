@@ -6,7 +6,7 @@ import './index.sass';
 
 ReactDOM.render(
 	<React.StrictMode>
-		<BrowserRouter basename='ecommerce-website'>
+		<BrowserRouter>
 			<App />
 		</BrowserRouter>
 	</React.StrictMode>,

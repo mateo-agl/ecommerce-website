@@ -93,4 +93,4 @@ export class Header extends React.Component {
 	switcherHandler () {
 		this.setState({ switch: !this.state.switch });
 	}
-}
+};

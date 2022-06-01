@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "author": "Mateo Aguilar",
   "dependencies": {
+    "axios": "^0.27.2",
     "dompurify": "^2.3.6",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
     "gh-pages": "^3.2.3",
     "html-react-parser": "^1.4.8",
     "react": "^17.0.2",
@@ -14,9 +17,10 @@
     "sass": "^1.52.0"
   },
   "scripts": {
+    "start": "nodemon server/server.js",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
+    "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -49,7 +53,8 @@
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
-    "eslint-plugin-react": "^7.29.3"
+    "eslint-plugin-react": "^7.29.3",
+    "nodemon": "^2.0.16"
   },
   "license": "ISC",
   "repository": {
@@ -58,6 +63,5 @@
   },
   "bugs": {
     "url": "https://github.com/mateo-agl/ecommerce-website/issues"
-  },
-  "homepage": "https://mateo-agl.github.io/ecommerce-website/"
+  }
 }

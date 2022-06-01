@@ -1,8 +1,8 @@
 import React from 'react';
-import { products } from '../../data.js';
 import './pdp.sass';
 import Images from './Images.jsx';
 import Info from './Info/Info.jsx';
+import axios from 'axios';
 
 export class PDP extends React.Component {
 	constructor (props) {
@@ -57,29 +57,16 @@ export class PDP extends React.Component {
 	}
 
 	componentDidMount() {
-		const id = window.location.pathname.split('/')[2];
-		
-		if(id) {
-			const product = products.find(p => p.id === id);
-
-			const defaultSelec = product.attributes.map(
-				att => {
-					const items = [];
-					att.items.map(
-						(item, i) => i === 0
-							? items.push({...item, selected: true})
-							: items.push({...item, selected: false})
-					);
-					return { ...att, items };
-				}
-			);
-
-			this.setState({
-				...product,
-				attributes: defaultSelec,
-				mainImg: product.gallery[0],
+		const id = window.location.pathname.split('/')[1];
+		const url = process.env.NODE_ENV === "development"
+			? `http://localhost:8080/products?id=${id}`
+			: `/products?id=${id}`;
+		axios.get(url)
+			.then(res => this.setState({
+				...res.data,
+				mainImg: res.data.gallery[0],
 				data: true
-			});
-		}
+			}))
+			.catch(err => console.error(err));
 	}
 }
