@@ -1,4 +1,4 @@
-# Anonymous Message Board
+# Ecommerce Website
 Demo: https://ecom-react-site.herokuapp.com
 
 ## Instalación
