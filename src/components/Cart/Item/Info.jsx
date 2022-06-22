@@ -4,10 +4,8 @@ export default class Info extends React.Component {
 	render () {
 		return (
 			<div className="item-info">
-				<p className="item-brand">
-					{this.props.item.brand}
-				</p>
-				<p className="item-name">
+				<p className="item-name-brand">
+					<b>{this.props.item.brand}</b><br/>
 					{this.props.item.name}
 				</p>
 				<label className="item-price">
@@ -18,61 +16,27 @@ export default class Info extends React.Component {
 				</label>
 				<div className="item-atts">
 					{
-						this.props.item.attributes.map(
-							(att, i) =>
-								<div key={i}>
-									<label>{att.name}</label>
-									<div className="cart-atts-cont">
-										{
-											att.type === 'swatch' ?
-												att.items.map(
-													(item, u) => 
-														<div
-															className={ 
-																item.selected
-																	? "cart-item-att selected-color"
-																	: "cart-item-att"
-															}
-															key={u}
-															style={{ background: item.value }}
-														/>	
-												)
-												: att.type === 'text' ?
-													att.items.map(
-														(item, u) => 
-															<div
-																className={ 
-																	item.selected
-																		? "cart-item-att selected-att"
-																		: "cart-item-att"
-																}
-																key={u}
-															>
-																{item.value}
-															</div>
-													)
-													: null
-										}
-									</div>
+						this.props.item.attributes.map((att, i) => (
+							<div key={i}>
+								<label>{att.name}</label>
+								<div className="cart-atts-cont">
+									{
+										att.items.map((item, u) => (
+											<div
+												className={ 
+													`cart-item-att ${item.selected && (att.type === 'swatch' ? "selected-color" : "selected-att")}`
+												}
+												key={u}
+												style={{ background: att.type === "swatch" && item.value }}
+											>
+												{att.type === "text" && item.value}
+											</div>
+										))
+									}
 								</div>
-						)
+							</div>
+						))
 					}
-					{/* {
-						this.props.item.selectedAtts.length > 0
-							? this.props.item.selectedAtts.map(
-								(att, i) =>
-									att[0] === '#' && att.length === 7 ? 
-										<div
-											className="cart-selected-att"
-											key={i}
-											style={{ background: att }}
-										/> : 
-										<div className="cart-selected-att" key={i}>
-											{att}
-										</div>
-							)
-							: null
-					} */}
 				</div>
 			</div>
 		);

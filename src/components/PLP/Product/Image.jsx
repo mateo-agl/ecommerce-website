@@ -1,5 +1,5 @@
 import React from 'react';
-import cart from '../../../assets/cart-icon2.svg';
+import { ReactComponent as Cart } from '../../../assets/cart-icon2.svg';
 
 export default class Image extends React.Component {
 	render () {
@@ -19,13 +19,11 @@ export default class Image extends React.Component {
 					src={this.props.obj.gallery[0]}
 				/>
 				{
-					this.props.obj.inStock ? 
-						<div
+					this.props.obj.inStock && 
+						<Cart
+							alt="add to cart icon"
 							className={
-								this.props.hover &&
-                        this.props.num === this.props.i
-									? 'add-cart-btn visible'
-									: 'add-cart-btn'
+								`add-cart-btn ${this.props.hover && this.props.num === this.props.i && "visible"}`
 							}
 							onClick={ () =>
 								this.props.addToCart(this.props.obj.id,
@@ -38,13 +36,7 @@ export default class Image extends React.Component {
 										imgs: this.props.obj.gallery
 									}
 								) }
-						>
-							<img
-								alt="add to cart icon"
-								src={cart}
-							/>
-						</div> :
-						false
+						/>
 				}
 			</div>
 		);

@@ -1,5 +1,7 @@
 import React from 'react';
-import Item from './Item/Item.jsx';
+import Img from './Item/Img';
+import Info from './Item/Info';
+import Quantity from './Item/Quantity';
 import './cart.sass';
 
 export class Cart extends React.Component {
@@ -9,19 +11,27 @@ export class Cart extends React.Component {
 				<h1 id="cart">Cart</h1>
 				<ul id="cart-page-items">
 					{
-						this.props.cart.map(
-							(item, i) =>
-								<Item
-									cart={this.props.cart}
+						this.props.cart.map((item, i) => (
+							<li className="cart-item" key={i}>
+								<div className="item-border" />
+								<Info
 									currency={this.props.currency}
-									decrease={this.props.decrease}
 									getPrice={this.props.getPrice}
+									item={item}
+								/>
+								<Quantity
+									decrease={this.props.decrease}
 									i={i}
 									increase={this.props.increase}
 									item={item}
-									key={i}
 								/>
-						)
+								<Img
+									cart={this.props.cart}
+									i={i}
+									item={item}
+								/>
+							</li>
+						))
 					}
 				</ul>
 			</div>

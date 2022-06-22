@@ -23,15 +23,13 @@ export class App extends React.Component {
 		return (
 			<div id="container">
 				<Header
-					cart={this.state.cart}
-					category={this.state.category}
 					changeCategory={this.changeCategory}
 					changeCurrency={this.changeCurrency}
-					currency={this.state.currency}
 					decrease={this.decrease}
 					getPrice={this.getPrice}
 					increase={this.increase}
 					removeFromCart={this.removeFromCart}
+					state={this.state}
 				/>
 				<Routes>
 					<Route path="/">

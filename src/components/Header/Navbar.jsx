@@ -13,23 +13,22 @@ export default class Navbar extends React.Component {
 		return (
 			<nav id="navbar">
 				{
-					this.state.categories.map(
-						(obj, i) =>
-							<label 
-								className={
-									obj.name === this.props.category
-										? 'nav-item btn active'
-										: 'nav-item btn'
-								}
-								key={i}
-								onClick={e => {
-									this.props.changeCategory(e);
-									this.props.showMenu();
-								}}
-							>
-								{ obj.name }
-							</label>
-					)
+					this.state.categories.map((obj, i) => (
+						<label 
+							className={
+								obj.name === this.props.category
+									? 'nav-item btn active'
+									: 'nav-item btn'
+							}
+							key={i}
+							onClick={e => {
+								this.props.changeCategory(e);
+								this.props.showMenu();
+							}}
+						>
+							{ obj.name }
+						</label>
+					))
 				}
 			</nav>
 		);

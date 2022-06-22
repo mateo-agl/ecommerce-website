@@ -3,7 +3,8 @@ import brand from '../../assets/brand-icon.svg';
 import { Link } from 'react-router-dom';
 import './header.sass';
 import Navbar from './Navbar';
-import Actions from './Actions/Actions';
+import CurrSwitcher from './Actions/CurrSwitcher';
+import Minicart from './Actions/Minicart';
 
 export class Header extends React.Component {
 	constructor (props) {
@@ -17,17 +18,9 @@ export class Header extends React.Component {
 		this.miniCartHandler = this.miniCartHandler.bind(this);
 		this.switcherHandler = this.switcherHandler.bind(this);
 	}
-
+	
 	render () {
-		window.onclick = (e) => {
-			const currBtn = document.querySelector('#curr-btn');
-			const minicart = document.querySelector('#minicart-cont');
-			if (!e.path.includes(currBtn) && this.state.switch) {
-				this.switcherHandler();
-			} else if (!e.path.includes(minicart) && this.state.overlay) {
-				this.miniCartHandler();
-			}
-		};
+		const { currency, cart, category } = this.props.state;
 		return (
 			<header id="navbar-cont">
 				<div 
@@ -38,7 +31,7 @@ export class Header extends React.Component {
 				</div>
 				<div className={this.state.show ? "mobile-menu show" : "mobile-menu"}>
 					<Navbar
-						category={this.props.category}
+						category={category}
 						changeCategory={this.props.changeCategory}
 						showMenu={this.showMenu}
 					/>
@@ -50,26 +43,29 @@ export class Header extends React.Component {
 						src={brand}
 					/>
 				</Link>
-				<Actions
-					cart={this.props.cart}
-					changeCurrency={this.props.changeCurrency}
-					currency={this.props.currency}
-					decrease={this.props.decrease}
-					getPrice={this.props.getPrice}
-					increase={this.props.increase}
-					miniCartHandler={this.miniCartHandler}
-					overlay={this.state.overlay}
-					removeFromCart={this.props.removeFromCart}
-					switch={this.state.switch}
-					switcherHandler={this.switcherHandler}
-				/>
+				<div id="actions">
+					<CurrSwitcher
+						changeCurrency={this.props.changeCurrency}
+						currency={currency}
+						switch={this.state.switch}
+						switcherHandler={this.switcherHandler}
+					/>
+					<Minicart
+						cart={cart}
+						currency={currency}
+						decrease={this.props.decrease}
+						getPrice={this.props.getPrice}
+						increase={this.props.increase}
+						item={this.props.item}
+						miniCartHandler={this.miniCartHandler}
+						overlay={this.state.overlay}
+						removeFromCart={this.props.removeFromCart}
+					/>
+				</div>
 				<div
-					className={
-						this.state.overlay
-							? 'visible'
-							: 'invisible'
-					}
+					className={this.state.overlay ? 'visible' : 'invisible'} 
 					id="rectangle-2"
+					onClick={() => this.miniCartHandler()}
 				/>
 			</header>
 		);
@@ -78,7 +74,7 @@ export class Header extends React.Component {
 	showMenu () {
 		if (window.innerWidth < 1024) {
 			this.setState({ show: !this.state.show });
-			document.querySelector("body").className = !this.state.show ? "overflow-hidden" : ""
+			document.querySelector("body").className = !this.state.show ? "overflow-hidden" : "";
 		}
 	}
 

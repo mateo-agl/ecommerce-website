@@ -8,25 +8,23 @@ export default class CurrSwitcher extends React.Component {
 		this.state = {
 			data: false
 		};
+
+		this.hide = this.hide.bind(this);
 	}
 
 	render () {
 		if(!this.state.data) return "";
 		return (
-			<div id="curr-switcher">
+			<div id="curr-switcher" tabIndex="-1" onBlur={this.hide}>
 				<div
 					className="btn"
 					id="curr-btn"
-					onClick={ () => this.props.switcherHandler() }
+					onClick={this.props.switcherHandler}
 				>
 					{this.props.currency + " "}
 					<img
 						alt="arrow icon"
-						className={
-							this.props.switch
-								? 'arrow-up'
-								: ''
-						}
+						className={`arrow ${this.props.switch ? 'up' : ''}`}
 						src={arrow}
 					/>
 				</div>
@@ -35,21 +33,28 @@ export default class CurrSwitcher extends React.Component {
 					id="curr-dropdown"
 				>
 					{
-						this.state.currencies.map(
-							(obj, i) =>
-								<li
-									className="curr btn"
-									key={i}
-									onClick={this.props.changeCurrency}
-								>
-									{obj.symbol + ' ' + obj.label}
-								</li>
-						)
+						this.state.currencies.map((obj, i) => (
+							<li
+								className="curr btn"
+								key={i}
+								onClick={e => (
+									this.props.changeCurrency(e),
+									this.props.switcherHandler()
+								)}
+							>
+								{obj.symbol + ' ' + obj.label}
+							</li>
+						))
 					}
 				</ul>
 			</div>
 		);
 	}
+
+	hide() {
+		this.props.switch && this.props.switcherHandler();
+	}
+
 	componentDidMount() {
 		const url = process.env.NODE_ENV === "development"
 			? "http://localhost:8080/currencies"

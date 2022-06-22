@@ -13,44 +13,26 @@ export default class Info extends React.Component {
 				</label>
 				<div className="mc-item-atts">
 					{
-						this.props.item.attributes.map(
-							(att, i) =>
-								<div key={i}>
-									<label>{att.name}</label>
-									<div className="atts-cont">
-										{
-											att.type === 'swatch' ?
-												att.items.map(
-													(item, u) => 
-														<div
-															className={ 
-																item.selected
-																	? "mc-item-color selected-color"
-																	: "mc-item-color"
-															}
-															key={u}
-															style={{ background: item.value }}
-														/>	
-												)
-												: att.type === 'text' ?
-													att.items.map(
-														(item, u) => 
-															<div
-																className={ 
-																	item.selected
-																		? "mc-item-att selected-att"
-																		: "mc-item-att"
-																}
-																key={u}
-															>
-																{item.value}
-															</div>
-													)
-													: null
-										}
-									</div>
+						this.props.item.attributes.map((att, i) => (
+							<div key={i}>
+								<label>{att.name}</label>
+								<div className="atts-cont">
+									{
+										att.items.map((item, u) => (
+											<div
+												className={ 
+													`mc-item-att ${item.selected && (att.type === 'swatch' ? "selected-color" : "selected-att")}`
+												}
+												key={u}
+												style={{ background: att.type === "swatch" && item.value }}
+											>
+												{att.type === "text" && item.value}
+											</div>
+										))
+									}
 								</div>
-						)
+							</div>
+						))
 					}
 				</div>
 			</div>

@@ -55,7 +55,10 @@
             font-size: 18px
             font-weight: 500
 
-            .arrow-up 
+            .arrow
+                transition: .2s
+
+            .arrow.up 
                 transform: rotate(180deg)
         
             #curr-dropdown 
@@ -72,6 +75,9 @@
 
                 .curr:hover 
                     color: $grey-2
+
+        #curr-switcher:focus
+            outline: none !important
 
     #minicart-btn 
         margin-left: 22px
@@ -193,7 +199,7 @@
                 .delete:hover 
                     background: $grey-2
 
-                .mc-item-att, .mc-item-color, .mc-quant-btn 
+                .mc-item-att, .mc-quant-btn 
                     text-align: center
                     height: 24px
                     border: 1px solid $grey-1
@@ -268,6 +274,9 @@
                     .mc-item-info 
                         display: block
                         width: 100%
+            
+            .mc-bottom 
+                bottom: 2em
 
     #rectangle-2 
         position: absolute

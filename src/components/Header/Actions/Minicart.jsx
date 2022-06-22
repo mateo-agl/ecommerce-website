@@ -1,7 +1,10 @@
 import React from 'react';
 import cart from '../../../assets/cart-icon.svg';
 import { Link } from 'react-router-dom';
-import Item from './Item/Item';
+import Quantity from "./Item/Quantity.jsx";
+import Info from "./Item/Info.jsx";
+import Img from "./Item/Img.jsx";
+import deleteIcon from '../../../assets/close.svg';
 
 export default class Minicart extends React.Component {
 	render () {
@@ -14,11 +17,7 @@ export default class Minicart extends React.Component {
 				>
 					<img alt="cart icon" src={cart}/>
 					<div
-						className={
-							this.props.cart.length > 0
-								? 'visible'
-								: 'invisible'
-						}
+						className={this.props.cart.length > 0 ? 'visible' : 'invisible'}
 						id="quantity-badge"
 					>
 						{this.getTotalQuantity()}
@@ -29,24 +28,34 @@ export default class Minicart extends React.Component {
 					id="minicart"
 				>
 					<div>
-						<label id="my-bag">My bag</label>
-						<label>{', ' + this.props.cart.length + ' items'}</label>
+						<label><b>My bag</b>{`, ${this.props.cart.length} items`}</label>
 					</div>
 					<ul id="minicart-items">
 						{
-							this.props.cart.map(
-								(item, i) =>
-									<Item
+							this.props.cart.map((item, i) => (
+								<li className="minicart-item" key={i}>
+									<Info
 										currency={this.props.currency}
-										decrease={this.props.decrease}
 										getPrice={this.props.getPrice}
+										item={item}
+									/>
+									<Quantity
+										decrease={this.props.decrease}
 										i={i}
 										increase={this.props.increase}
-										item={item}
-										key={i}
-										removeFromCart={this.props.removeFromCart}
+										quantity={item.quantity}
 									/>
-							)
+									<Img
+										img={item.imgs[0]}
+									/>
+									<img
+										alt="delete icon"
+										className="delete btn"
+										src={deleteIcon}
+										onClick={() => this.props.removeFromCart(i)}
+									/>
+								</li>
+							))
 						}
 					</ul>
 					<div className="mc-bottom">

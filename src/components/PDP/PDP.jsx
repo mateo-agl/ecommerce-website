@@ -1,7 +1,10 @@
 import React from 'react';
 import './pdp.sass';
 import Images from './Images.jsx';
-import Info from './Info/Info.jsx';
+import Price from './Info/Price';
+import Attributes from './Info/Attributes';
+import AddToCart from './Info/AddToCart';
+import Description from './Info/Description';
 import axios from 'axios';
 
 export class PDP extends React.Component {
@@ -29,13 +32,26 @@ export class PDP extends React.Component {
 							src={ this.state.mainImg }
 						/>
 					</div>
-					<Info
-						addToCart={this.props.addToCart}
-						currency={this.props.currency}
-						getPrice={this.props.getPrice}
-						selectAttribute={this.selectAttribute}
-						state={this.state}
-					/>
+					<div id="info">
+						<h2 id="pdp-title">{this.state.brand}</h2>
+						<p id="subtitle">{this.state.name}</p>
+						<Attributes
+							selectAttribute={this.selectAttribute}
+							state={this.state}
+						/>
+						<Price
+							currency={this.props.currency}
+							getPrice={this.props.getPrice}
+							state={this.state}
+						/>
+						<AddToCart
+							addToCart={this.props.addToCart}
+							state={this.state}
+						/>
+						<Description
+							description={this.state.description}
+						/>
+					</div>
 				</div>
 			</article>
 		);
