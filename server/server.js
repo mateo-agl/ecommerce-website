@@ -53,4 +53,6 @@ app.get("/currencies", (req, res) => res.send(currencies));
 
 app.get("/categories", (req, res) => res.send(categories));
 
+app.get("/*", (req, res) => res.sendFile(path.resolve("build/index.html")));
+
 app.listen(port, () => console.log(`App listening on port ${port}`));
