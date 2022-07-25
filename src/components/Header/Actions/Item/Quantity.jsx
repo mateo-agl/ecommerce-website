@@ -1,21 +1,22 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { decrease, increase } from "../../../../redux/reducers/appReducer";
 
-export default class Quantity extends React.Component {
-	render() {
-		return (
-			<div className="mc-quant-control">
-				<span
-					className="mc-quant-btn"
-					onClick={ () => this.props.increase(this.props.i) }
-				>+
-				</span>
-				<label className="mc-quant-num">{this.props.quantity}</label>
-				<span
-					className="mc-quant-btn"
-					onClick={ () => this.props.decrease(this.props.i) }
-				>-
-				</span>
-			</div>
-		);
-	}
-}
+export const Quantity = ({ i, quantity }) => {
+	const dispatch = useDispatch();
+	return (
+		<div className="mc-quant-control">
+			<span
+				className="mc-quant-btn"
+				onClick={ () => dispatch(increase(i)) }
+			>+
+			</span>
+			<label className="mc-quant-num">{quantity}</label>
+			<span
+				className="mc-quant-btn"
+				onClick={ () => dispatch(decrease(i)) }
+			>-
+			</span>
+		</div>
+	);
+};

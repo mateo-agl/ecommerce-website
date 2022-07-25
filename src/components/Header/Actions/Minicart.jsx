@@ -1,95 +1,85 @@
 import React from 'react';
-import cart from '../../../assets/cart-icon.svg';
+import cartIcon from '../../../assets/cart-icon.svg';
 import { Link } from 'react-router-dom';
-import Quantity from "./Item/Quantity.jsx";
-import Info from "./Item/Info.jsx";
-import Img from "./Item/Img.jsx";
+import { Quantity } from "./Item/Quantity.jsx";
+import { Info } from "./Item/Info.jsx";
+import { Img } from "./Item/Img.jsx";
 import deleteIcon from '../../../assets/close.svg';
+import { miniCartHandler } from '../../../redux/reducers/headerReducer';
+import { removeFromCart } from '../../../redux/reducers/appReducer';
+import { useDispatch } from 'react-redux';
 
-export default class Minicart extends React.Component {
-	render () {
-		return (
-			<div id="minicart-cont">
+export const Minicart = ({ getPrice, cart, currency, overlay }) => {
+	const dispatch = useDispatch();
+	
+	const getTotalQuantity = () => {
+		let total = 0;
+		cart.map(obj => total += obj.quantity);
+		return total;
+	};
+
+	const getTotalAmount = () => {
+		let total = 0;
+
+		cart.map(obj => {
+			const amount = getPrice(obj) * obj.quantity;
+			return total += amount;
+		});
+		return currency + total.toFixed(2);
+	};
+	
+	return (
+		<div id="minicart-cont">
+			<div
+				className="btn"
+				id="minicart-btn"
+				onClick={() => dispatch(miniCartHandler())}
+			>
+				<img alt="cart icon" src={cartIcon}/>
 				<div
-					className="btn"
-					id="minicart-btn"
-					onClick={ () => this.props.miniCartHandler() }
+					className={cart.length > 0 ? 'visible' : 'invisible'}
+					id="quantity-badge"
 				>
-					<img alt="cart icon" src={cart}/>
-					<div
-						className={this.props.cart.length > 0 ? 'visible' : 'invisible'}
-						id="quantity-badge"
-					>
-						{this.getTotalQuantity()}
-					</div>
+					{ getTotalQuantity() }
 				</div>
-				<div
-					className={ this.props.overlay ? 'visible' : 'invisible' }
-					id="minicart"
-				>
-					<div>
-						<label><b>My bag</b>{`, ${this.props.cart.length} items`}</label>
+			</div>
+			<div
+				className={ overlay ? 'visible' : 'invisible' }
+				id="minicart"
+			>
+				<div>
+					<label><b>My bag</b>{`, ${cart.length} items`}</label>
+				</div>
+				<ul id="minicart-items">
+					{
+						cart.map((item, i) => (
+							<li className="minicart-item" key={i}>
+								<Info currency={currency} getPrice={getPrice} item={item}/>
+								<Quantity i={i} quantity={item.quantity}/>
+								<Img img={item.imgs[0]}/>
+								<img
+									alt="delete icon"
+									className="delete btn"
+									src={deleteIcon}
+									onClick={() => dispatch(removeFromCart(i))}
+								/>
+							</li>
+						))
+					}
+				</ul>
+				<div className="mc-bottom">
+					<div id="mc-total-cont">
+						<label id="mc-total-label">Total</label>
+						<label id="mc-total-amount">{ getTotalAmount() }</label>
 					</div>
-					<ul id="minicart-items">
-						{
-							this.props.cart.map((item, i) => (
-								<li className="minicart-item" key={i}>
-									<Info
-										currency={this.props.currency}
-										getPrice={this.props.getPrice}
-										item={item}
-									/>
-									<Quantity
-										decrease={this.props.decrease}
-										i={i}
-										increase={this.props.increase}
-										quantity={item.quantity}
-									/>
-									<Img
-										img={item.imgs[0]}
-									/>
-									<img
-										alt="delete icon"
-										className="delete btn"
-										src={deleteIcon}
-										onClick={() => this.props.removeFromCart(i)}
-									/>
-								</li>
-							))
-						}
-					</ul>
-					<div className="mc-bottom">
-						<div id="mc-total-cont">
-							<label id="mc-total-label">Total</label>
-							<label id="mc-total-amount">{this.getTotalAmount()}</label>
-						</div>
-						<div id="dropdown-btns">
-							<Link className="btn" id="view-bag" to="/cart">
-								<span>VIEW BAG</span>
-							</Link>
-							<span className="btn" id="checkout">CHECKOUT</span>
-						</div>
+					<div id="dropdown-btns">
+						<Link className="btn" id="view-bag" to="/cart">
+							<span>VIEW BAG</span>
+						</Link>
+						<span className="btn" id="checkout">CHECKOUT</span>
 					</div>
 				</div>
 			</div>
-		);
-	}
-
-	getTotalQuantity () {
-		let total = 0;
-		this.props.cart.map(obj => total += obj.quantity);
-		return total;
-	}
-
-	getTotalAmount () {
-		let total = 0;
-
-		this.props.cart.map(
-			obj => {
-				const amount = this.props.getPrice(obj) * obj.quantity;
-				return total += amount;
-			}
-		);
-		return this.props.currency + total.toFixed(2);
-	}
-}
+		</div>
+	);
+};

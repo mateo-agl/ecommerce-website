@@ -1,71 +1,48 @@
-import React from 'react';
-import Image from './Product/Image';
-import Content from './Product/Content';
+import React, { useEffect } from 'react';
+import { Content } from './Product/Content';
+import { Image } from './Product/Image';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import './plp.sass';
+import { useDispatch, useSelector } from 'react-redux';
+import { mouseIn, mouseOut } from '../../redux/reducers/plpReducer';
 
-export class PLP extends React.Component {
-	constructor (props) {
-		super(props);
-		this.state = {
-			hover: false,
-			num: '',
-			data: false
-		};
-	}
-	render () {
-		if (!this.state.data) return "";
-		return (
-			<main id="category-cont">
-				<h1 id="category">{this.props.category}</h1>
-				<div id="products-cont">
-					{
-						this.state.products.map((obj, i) => (
-							(this.props.category === "all" || this.props.category === obj.category) &&
-							<div
-								className="product"
-								key={i}
-								onMouseEnter={ () => this.mouseIn(i) }
-								onMouseLeave={ () => this.mouseOut() }
-							>
-								<Link to={'/' + obj.id}>
-									<div className="link"/>
-								</Link>
-								<Image
-									addToCart={this.props.addToCart}
-									hover={this.state.hover}
-									i={i}
-									num={this.state.num}
-									obj={obj}
-								/>
-								<Content
-									currency={this.props.currency}
-									getPrice={this.props.getPrice}
-									obj={obj}
-								/>
-							</div>
-						))
-					}
-				</div>
-			</main>
-		);
-	}
+export const PLP = ({ getPrice }) => {
+	const { plpReducer, appReducer } = useSelector(state => state);
+	const dispatch = useDispatch();
 
-	mouseIn (i) {
-		this.setState({ hover: true, num: i });
-	}
+	useEffect(() => dispatch({type: "GET_PRODUCTS"}), []);
 
-	mouseOut () {
-		this.setState({ hover: false, num: '' });
-	}
-
-	componentDidMount() {
-		const url = process.env.NODE_ENV === "development"
-			? "http://localhost:8080/products"
-			: "/products";
-		axios.get(url)
-			.then(res => this.setState({ products: res.data, data: true }))
-			.catch(err => console.error(err));
-	}
+	return (
+		<main id="category-cont">
+			<h1 id="category">{appReducer.category}</h1>
+			<div id="products-cont">
+				{
+					plpReducer.products.map((obj, i) => (
+						(appReducer.category === "all" || appReducer.category === obj.category) &&
+						<div
+							className="product"
+							key={i}
+							onMouseEnter={ () => dispatch(mouseIn(i)) }
+							onMouseLeave={ () => dispatch(mouseOut()) }
+						>
+							<Link to={'/' + obj.id}>
+								<div className="link"/>
+							</Link>
+							<Image
+								hover={plpReducer.hover}
+								i={i}
+								num={plpReducer.num}
+								obj={obj}
+							/>
+							<Content
+								currency={appReducer.currency}
+								getPrice={getPrice}
+								obj={obj}
+							/>
+						</div>
+					))
+				}
+			</div>
+		</main>
+	);
 };

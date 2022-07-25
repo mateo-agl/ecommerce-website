@@ -1,52 +1,53 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { selectAttribute } from '../../../redux/reducers/pdpReducer';
 
-export default class Attributes extends React.Component {
-	render () {
-		return (
-			<div id="attributes">
-				{
-					this.props.state.attributes.map(
-						(obj, i) =>
-							<section className="att" key={i}>
-								<label className="att-name">{obj.name}</label>
-								<div className="att-btns">
-									{
-										obj.type === 'text'
+export const Attributes = ({ state }) => {
+	const dispatch = useDispatch();
+	return (
+		<div id="attributes">
+			{
+				state.attributes.map(
+					(obj, i) =>
+						<section className="att" key={i}>
+							<label className="att-name">{obj.name}</label>
+							<div className="att-btns">
+								{
+									obj.type === 'text'
+										? obj.items.map(
+											(item, u) =>
+												<span
+													className={
+														item.selected
+															? 'text-att btn selected-att'
+															: 'text-att btn'
+													}
+													key={u}
+													onClick={ () => dispatch(selectAttribute({attIndex: i, itemIndex: u})) }
+												>
+													{item.value}
+												</span>
+										)
+										: obj.type === 'swatch'
 											? obj.items.map(
 												(item, u) =>
 													<span
 														className={
 															item.selected
-																? 'text-att btn selected-att'
-																: 'text-att btn'
+																? 'color-att btn selected-color'
+																: 'color-att btn'
 														}
 														key={u}
-														onClick={ () => this.props.selectAttribute(obj, u) }
-													>
-														{item.value}
-													</span>
+														style={{ background: item.value }}
+														onClick={ () => dispatch(selectAttribute({attIndex: i, itemIndex: u})) }
+													/>
 											)
-											: obj.type === 'swatch'
-												? obj.items.map(
-													(item, u) =>
-														<span
-															className={
-																item.selected
-																	? 'color-att btn selected-color'
-																	: 'color-att btn'
-															}
-															key={u}
-															style={{ background: item.value }}
-															onClick={ () => this.props.selectAttribute(obj, u) }
-														/>
-												)
-												: null
-									}
-								</div>
-							</section>
-					)
-				}
-			</div>
-		);
-	}
-}
+											: null
+								}
+							</div>
+						</section>
+				)
+			}
+		</div>
+	);
+};

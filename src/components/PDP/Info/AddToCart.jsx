@@ -1,26 +1,27 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../../redux/reducers/appReducer';
 
-export default class AddToCart extends React.Component {
-	render () {
-		return (
-			<div className={
-				this.props.state.inStock
-					? 'pdp-atc btn visible'
-					: 'pdp-atc btn invisible'
-			}
-			onClick={ () =>
-				this.props.addToCart(this.props.state.id,
-					{
-						id: this.props.state.id,
-						brand: this.props.state.brand,
-						name: this.props.state.name,
-						prices: this.props.state.prices,
-						attributes: this.props.state.attributes,
-						imgs: this.props.state.gallery
-					}) }
-			>
-				<span id="atc-label">ADD TO CART</span>
-			</div>
-		);
-	}
-}
+export const AddToCart = ({ state }) => {
+	const dispatch = useDispatch();
+	return (
+		<div className={
+			state.inStock
+				? 'pdp-atc btn visible'
+				: 'pdp-atc btn invisible'
+		}
+		onClick={ () => dispatch(
+			addToCart({
+				id: state.id,
+				brand: state.brand,
+				name: state.name,
+				prices: state.prices,
+				attributes: state.attributes,
+				imgs: state.gallery
+			}) 
+		)}
+		>
+			<span id="atc-label">ADD TO CART</span>
+		</div>
+	);
+};
