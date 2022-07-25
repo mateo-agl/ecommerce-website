@@ -33,8 +33,8 @@
         "react/jsx-sort-props": ["error", {
             "callbacksLast": true
         }],
-        "indent": ["error", "tab"],
-        "react/jsx-indent": ["error", "tab"],
+        "indent": ["warn", "tab"],
+        "react/jsx-indent": ["warn", "tab"],
         "multiline-ternary": ["error", "always-multiline"],
         "semi": ["warn", "always"]
     }
